@@ -1,0 +1,21 @@
+##开启rewrite引擎,前提，apache必须开启rewrite模块
+#RewriteEngine On
+##重写规则     RewriteRule  请求地址    重写地址
+#RewriteRule view@_@(\d+)\-_-.html$  content.php?id=$1
+#RewriteRule ^main$  index.php
+#
+## view/1.html   =>  view.php?id=1
+##RewriteRule view/(\d+)\.html$ view.php?id=$1
+
+<IfModule rewrite_module>
+#写你的rewrite规则
+RewriteEngine On
+# 可以配置多个规则，匹配的顺序是从上到下
+RewriteRule main$  index.php
+RewriteRule list-cate_id-(\d+)\.html$ list.php?cate_id=$1
+RewriteRule content-id-(\d+)\.html$ content.php?id=$1
+
+
+#设置404错误   list.php?cate_id=1
+#ErrorDocument 404 /error.php
+</IfModule>
